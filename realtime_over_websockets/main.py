@@ -24,8 +24,6 @@ realtime_llm_config = {
     "temperature": 0.8,
 }
 
-PORT = 5050
-
 app = FastAPI()
 
 
@@ -46,7 +44,7 @@ templates = Jinja2Templates(directory=website_files_path / "templates")
 @app.get("/start-chat/", response_class=HTMLResponse)
 async def start_chat(request: Request) -> HTMLResponse:
     """Endpoint to return the HTML page for audio chat."""
-    port = PORT  # Extract the client's port
+    port = request.url.port
     return templates.TemplateResponse("chat.html", {"request": request, "port": port})
 
 
