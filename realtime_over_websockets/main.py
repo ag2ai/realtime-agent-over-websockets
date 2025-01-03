@@ -11,6 +11,7 @@ from fastapi.templating import Jinja2Templates
 
 realtime_config_list = autogen.config_list_from_json(
     "OAI_CONFIG_LIST",
+    file_location=Path(__file__).parent.parent,
     filter_dict={
         "tags": ["gpt-4o-mini-realtime"],
     },
