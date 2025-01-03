@@ -1,26 +1,24 @@
-import os
 from logging import getLogger
 from pathlib import Path
 from typing import Annotated
 
+import autogen
 from autogen.agentchat.realtime_agent import RealtimeAgent, WebSocketAudioAdapter
-from dotenv import load_dotenv
 from fastapi import FastAPI, Request, WebSocket
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-load_dotenv()
+realtime_config_list = autogen.config_list_from_json(
+    "OAI_CONFIG_LIST",
+    filter_dict={
+        "tags": ["gpt-4o-mini-realtime"],
+    },
+)
 
 realtime_llm_config = {
     "timeout": 600,
-    "config_list": [
-        {
-            "model": "gpt-4o-mini-realtime-preview",
-            "api_key": os.getenv("OPENAI_API_KEY"),
-            "tags": ["gpt-4o-mini-realtime", "realtime"],
-        },
-    ],
+    "config_list": realtime_config_list,
     "temperature": 0.8,
 }
 
