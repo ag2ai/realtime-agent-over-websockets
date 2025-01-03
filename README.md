@@ -11,7 +11,8 @@ This project demonstrates how to create a voice assistant using Python, FastAPI,
 
 Before you begin, ensure you have the following:
 - **Python 3.9+**: The project was tested with `3.9`. Download [here](https://www.python.org/downloads/).
-- **API Access**: Access to the OpenAI API (credentials required).
+- **An OpenAI account and an OpenAI API Key.** You can sign up [here](https://platform.openai.com/).
+  - **OpenAI Realtime API access.**
 
 ## **Local Setup**
 
@@ -28,7 +29,16 @@ Create a `.env` file based on the provided `.env.example`:
 ```bash
 cp .env.example .env
 ```
-Add your OPENAI API credentials to the `.env` file.
+In the .env file, update the `OPENAI_API_KEY` to your OpenAI API key.
+
+### (Optional) Create and use a virtual environment
+
+To reduce cluttering your global Python environment on your machine, you can create a virtual environment. On your command line, enter:
+
+```
+python3 -m venv env
+source env/bin/activate
+```
 
 ### **3. Install Dependencies**
 Install the required Python packages using `pip`:
@@ -43,7 +53,7 @@ uvicorn realtime_over_websockets.main:app --port 5050
 ```
 
 ## **Test the App**
-With the server running, open the client application in your browser. Speak into your microphone, and the AI assistant will respond in real time.
+With the server running, open the client application in your browser by navigating to [http://localhost:5050/start-chat/](http://localhost:5050/start-chat/). Speak into your microphone, and the AI assistant will respond in real time.
 
 ## **License**
 This project is licensed under the [MIT License](LICENSE).
