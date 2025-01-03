@@ -43,7 +43,7 @@ source env/bin/activate
 ### **3. Install Dependencies**
 Install the required Python packages using `pip`:
 ```bash
-pip install .
+pip install -r requirements.txt
 ```
 
 ### **4. Start the Server**
