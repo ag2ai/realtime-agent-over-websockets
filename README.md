@@ -21,7 +21,7 @@ Follow these steps to set up the project locally:
 ### **1. Clone the Repository**
 ```bash
 git clone https://github.com/sternakt/RealtimeAgent-WebSocketAudioAdapter.git
-cd RealtimeAgent-WebSocketAudioAdapter
+cd realtime-agent-over-websockets
 ```
 
 ### **2. Set Up Environment Variables**
