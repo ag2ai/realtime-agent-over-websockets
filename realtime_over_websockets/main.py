@@ -14,7 +14,7 @@ realtime_config_list = autogen.config_list_from_json(
     "OAI_CONFIG_LIST",
     file_location=Path(__file__).parent.parent,
     filter_dict={
-        "tags": ["gemini-realtime"], # Use the tag of the model configuration defined in the OAI_CONFIG_LIST
+        "tags": ["gpt-4o-mini-realtime"], # Use the tag of the model configuration defined in the OAI_CONFIG_LIST
     },
 )
 
