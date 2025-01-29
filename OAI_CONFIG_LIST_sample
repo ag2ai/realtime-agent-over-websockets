@@ -2,6 +2,12 @@
     {
         "model": "gpt-4o-mini-realtime-preview",
         "api_key": "<your OpenAI API key here>",
-        "tags": ["gpt-4o-mini-realtime", "realtime"]
+        "tags": ["gpt-4o-mini-realtime"]
+    },
+    {
+        "model": "gemini-2.0-flash-exp",
+        "api_key": "<your Gemini API key here>",
+        "api_type": "google",
+        "tags": ["gemini-realtime"]
     }
 ]

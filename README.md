@@ -29,7 +29,13 @@ Create a `OAI_CONFIG_LIST` file based on the provided `OAI_CONFIG_LIST_sample`:
 ```bash
 cp OAI_CONFIG_LIST_sample OAI_CONFIG_LIST
 ```
-In the OAI_CONFIG_LIST file, update the `api_key` to your OpenAI API key.
+
+#### To use OpenAI Realtime API
+1. In the OAI_CONFIG_LIST file, update the `api_key` to your OpenAI API key for the configuration with the tag "gpt-4o-mini-realtime"
+
+#### To use Gemini Live API
+1. In the OAI_CONFIG_LIST file, update the `api_key` to your Gemini API key for the configuration with the tag "gemini-realtime"
+2. In realtime_over_websockets/main.py update [filter_dict tag](https://github.com/ag2ai/realtime-agent-over-websockets/blob/main/realtime_over_websockets/main.py#L17) to "gemini-realtime"
 
 ### (Optional) Create and use a virtual environment
 

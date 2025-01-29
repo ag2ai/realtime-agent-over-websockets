@@ -1,3 +1,4 @@
+from contextlib import asynccontextmanager
 from logging import getLogger
 from pathlib import Path
 from typing import Annotated
@@ -13,7 +14,7 @@ realtime_config_list = autogen.config_list_from_json(
     "OAI_CONFIG_LIST",
     file_location=Path(__file__).parent.parent,
     filter_dict={
-        "tags": ["gpt-4o-mini-realtime"],
+        "tags": ["gpt-4o-mini-realtime"], # Use the tag of the model configuration defined in the OAI_CONFIG_LIST
     },
 )
 
@@ -25,6 +26,13 @@ realtime_llm_config = {
 
 app = FastAPI()
 
+@asynccontextmanager
+async def lifespan(*args, **kwargs):
+    print("Application started. Please visit http://localhost:5050/start-chat to start voice chat.")
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 
 @app.get("/", response_class=JSONResponse)
 async def index_page() -> dict[str, str]:
