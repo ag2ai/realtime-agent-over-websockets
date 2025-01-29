@@ -31,7 +31,7 @@ cp OAI_CONFIG_LIST_sample OAI_CONFIG_LIST
 ```
 
 #### To use OpenAI Realtime API
-In the OAI_CONFIG_LIST file, update the `api_key` to your OpenAI API key for the configuration with the tag "gpt-4o-mini-realtime"
+1. In the OAI_CONFIG_LIST file, update the `api_key` to your OpenAI API key for the configuration with the tag "gpt-4o-mini-realtime"
 
 #### To use Gemini Live API
 1. In the OAI_CONFIG_LIST file, update the `api_key` to your Gemini API key for the configuration with the tag "gemini-realtime"
