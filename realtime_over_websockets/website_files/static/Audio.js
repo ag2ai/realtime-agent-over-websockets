@@ -13,7 +13,7 @@ export class Audio {
         this.inAudioContext = null;
         this.processorNode = null;
         this.stream = null;
-        this.bufferSize = 8192;  // Define the buffer size for capturing chunks
+        this.bufferSize = 2048;  // Define the buffer size for capturing chunks
     }
 
     // Initialize WebSocket and start receiving audio data
@@ -28,6 +28,16 @@ export class Audio {
                     event: "start",
                     start: {
                         streamSid: crypto.randomUUID(),
+                    },
+                    session: {
+                        input_audio_format: {
+                            type: "pcm_f32le",  // Align with our input format
+                            sampling_rate: 24000
+                        },
+                        output_audio_format: {
+                            type: "pcm_f32le",
+                            sampling_rate: 24000
+                        }
                     }
                 }
                 this.socket.send(JSON.stringify(sessionStarted))
@@ -169,18 +179,25 @@ export class Audio {
     // Decode PCM 16-bit data into AudioBuffer
     async decodePcm16Data(pcmData) {
         const audioData = new Float32Array(pcmData.byteLength / 2);
-
-        // Convert PCM 16-bit to Float32Array
         const dataView = new DataView(pcmData);
+        
+        // Add smoothing at chunk boundaries
+        const smoothingWindowSize = 128;
         for (let i = 0; i < audioData.length; i++) {
-            const pcm16 = dataView.getInt16(i * 2, true); // true means little-endian
-            audioData[i] = pcm16 / 32768;  // Convert to normalized float (-1 to 1)
+            const pcm16 = dataView.getInt16(i * 2, true);
+            let value = pcm16 / 32768;
+            
+            // Apply smoothing at chunk boundaries (to avoid pops and clicks)
+            if (i < smoothingWindowSize || i > audioData.length - smoothingWindowSize) {
+                const factor = Math.min(i, audioData.length - i) / smoothingWindowSize;
+                value *= factor;
+            }
+            
+            audioData[i] = value;
         }
-
-        // Create an audio buffer from the Float32Array
+    
         const audioBuffer = this.outAudioContext.createBuffer(1, audioData.length, 24000);
         audioBuffer.getChannelData(0).set(audioData);
-
         return audioBuffer;
     }
 
